@@ -12,7 +12,7 @@ Requisitos cubiertos:
 - Código modular (una función = una responsabilidad)
 """
 
-import paises.csv
+import csv          
 import os
 from typing import List, Dict, Optional, Tuple
 # Tipos 
@@ -49,7 +49,7 @@ def mostrar_tabla(paises: List[Pais]) -> None:
         )
     imprimir_linea(len(header), "=")
 
-# ---------- Lectura y validación de CSV ----------
+#  Lectura y validación de CSV 
 def parsear_entero(valor: str, campo: str, fila_nro: int) -> Optional[int]:
     try:
         v = int(valor)
@@ -99,12 +99,12 @@ def leer_csv(ruta: str) -> List[Pais]:
     print(f"[OK] Se cargaron {len(paises)} países desde '{ruta}'.")
     return paises
 
-# ---------- Búsqueda ----------
+#  Búsqueda
 def buscar_pais(nombre_parcial: str, paises: List[Pais]) -> List[Pais]:
     q = nombre_parcial.casefold().strip()
     return [p for p in paises if q in p["nombre"].casefold()]
 
-# ---------- Filtros ----------
+#  Filtros 
 def filtrar_por_continente(continente: str, paises: List[Pais]) -> List[Pais]:
     q = continente.casefold().strip()
     return [p for p in paises if p["continente"].casefold() == q]
@@ -129,7 +129,7 @@ def filtrar_por_rango(
         res.append(p)
     return res
 
-# ---------- Ordenamientos ----------
+# Ordenamientos
 def ordenar_por_clave(paises: List[Pais], clave: str, descendente: bool = False) -> List[Pais]:
     """
     clave ∈ {"nombre", "poblacion", "superficie"}
@@ -138,7 +138,7 @@ def ordenar_por_clave(paises: List[Pais], clave: str, descendente: bool = False)
         return sorted(paises, key=lambda p: p["nombre"].casefold(), reverse=descendente)
     return sorted(paises, key=lambda p: int(p[clave]), reverse=descendente)
 
-# ---------- Estadísticas ----------
+#  Estadísticas 
 def estadisticas(paises: List[Pais]) -> Dict[str, object]:
     if not paises:
         return {}
@@ -166,7 +166,7 @@ def mostrar_estadisticas(paises: List[Pais]) -> None:
         print("No hay datos para calcular estadísticas.")
         return
     imprimir_linea()
-    print("ESTADÍSTICAS")
+    print(" ESTADÍSTICAS")
     imprimir_linea()
     print(f"- País con mayor población: {e['mayor_poblacion']['nombre']} "
           f"({formatear_entero(e['mayor_poblacion']['poblacion'])})")
@@ -179,7 +179,7 @@ def mostrar_estadisticas(paises: List[Pais]) -> None:
         print(f"  • {cont}: {cant}")
     imprimir_linea()
 
-# ---------- Inputs seguros ----------
+#  Inputs seguros
 def pedir_opcion(msg: str, opciones_validas: List[str]) -> str:
     while True:
         op = input(msg).strip()
@@ -203,7 +203,7 @@ def pedir_entero_opcional(msg: str) -> Optional[int]:
         except Exception:
             print("Valor inválido. Ingrese un entero >= 0 o vacío para omitir.")
 
-# ---------- Menús ----------
+#  Menús
 def menu_principal() -> str:
     imprimir_linea()
     print("MENÚ PRINCIPAL")
@@ -238,7 +238,7 @@ def menu_orden() -> Tuple[str, bool]:
     claves = {"1": "nombre", "2": "poblacion", "3": "superficie"}
     return claves[op], desc
 
-# ---------- Control ----------
+#  Control
 def loop(ruta_csv: str = "paises.csv") -> None:
     paises = leer_csv(ruta_csv)
     if not paises:
@@ -317,12 +317,6 @@ def loop(ruta_csv: str = "paises.csv") -> None:
                 vista = list(paises)
                 print("[OK] Vista restaurada a los datos originales.")
 
-# ---------- Punto de entrada ----------
+#  Punto de entrada 
 if __name__ == "__main__":
-    # Cambiá "paises.csv" si usás otro nombre/ruta
-    loop("paises.csv")
-
-
-
-
-
+    loop(r"C:\Users\trans\OneDrive\Desktop\TP INTEGRADOR FINAL ARANCIBIA ROMERO\paises.csv.csv")
