@@ -166,7 +166,7 @@ def mostrar_estadisticas(paises: List[Pais]) -> None:
         print("No hay datos para calcular estadísticas.")
         return
     imprimir_linea()
-    print("📊 ESTADÍSTICAS")
+    print("ESTADÍSTICAS")
     imprimir_linea()
     print(f"- País con mayor población: {e['mayor_poblacion']['nombre']} "
           f"({formatear_entero(e['mayor_poblacion']['poblacion'])})")
@@ -321,6 +321,7 @@ def loop(ruta_csv: str = "paises.csv") -> None:
 if __name__ == "__main__":
     # Cambiá "paises.csv" si usás otro nombre/ruta
     loop("paises.csv")
+
 
 
 
